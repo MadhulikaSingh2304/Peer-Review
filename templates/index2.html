@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Ratings : Batch {{ batch }}</title>
+  <!-- Include Tailwind CSS CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.7/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-gray-100">
+  <div class="container mx-auto p-4">
+    {% csrf_token %}
+    <h1 class="text-2xl font-bold mb-4">Student Ratings : Batch {{ batch }}</h1>
+
+    <form class="bg-gray-200 p-4 rounded shadow-md" method="POST" action="{% url 'peerapp:Review' %}">
+      {% csrf_token %}
+      {% if teammates %}
+      {% for teammate in teammates %}
+      <input type="hidden" name="batch" value="{{ teammates.0.batch.batch }}"> <!-- Add batch value as a hidden field -->
+      <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="name1">Team Member Name {{ forloop.counter }}:</label>
+        <input
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          id="name{{ forloop.counter }}" type="text" value="{{ teammate.name }}" name="name" readonly>
+      </div>
+      <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="usn1">Team Member USN {{ forloop.counter }}:</label>
+        <input
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          id="usn{{ forloop.counter }}" type="text" value="{{ teammate.usn }}" name="usn" readonly>
+      </div>
+      <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="rating1">Contribution to the project (Rating 1-5):</label>
+        <input
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          id="rating{{ forloop.counter }}" type="number" min="0" max="5" placeholder="Enter rating out of 5" name="rating_{{ teammate.usn }}">
+      </div>
+      {% endfor %}
+      {% else %}
+      <p>No teammates found.</p>
+      {% endif %}
+      <button
+        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+        type="submit" onclick="showSuccessMessage()">
+        Submit
+      </button>
+    </form>
+  </div>
+  <script>
+    function showSuccessMessage() {
+      alert('Successfully submitted!');
+      window.location.href = "index.html"; 
+    }
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,118 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Peer Review</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="icon" type="dsceicon.jpeg" href="dsceicon.jpeg">
+</head>
+
+<body class="bg-gray-100">
+
+  <header class="bg-white py-4">
+    <div class="container mx-auto flex justify-between items-center px-4">
+      <div>
+        <img src="{% static 'assets/dscelogo.png' %}" alt="Logo" class="h-20">
+      </div>
+      <div>
+        <img src="{% static 'assets/dsceinfo.png' %}" alt="Picture 1" class="h-15 ml-4">
+      </div>
+    </div>
+  </header>
+
+
+  <!-- Header -->
+  <nav class="bg-blue-900 text-white p-4">
+    <div class="container mx-auto flex justify-between items-center">
+      <h1 class="text-xl font-bold">DEPARTMENT OF COMPUTER SCIENCE & ENGINEERING</h1>
+      <nav>
+        <a href="#" class="text-white hover:text-gray-300 mx-2">Home</a>
+        <a href="#" class="text-white hover:text-gray-300 mx-2">About</a>
+        <a href="#" class="text-white hover:text-gray-300 mx-2">Contact</a>
+      </nav>
+    </div>
+  </nav>
+
+
+
+  <!-- Main Content -->
+
+  <div class="bg-white py-4">
+    <div class="container mx-auto px-4">
+      <h2 class="text-2xl font-bold text-black">Welcome to Final Year Project Peer Review</h2>
+      <p class="text-black mt-2">Explore and rate your teammates based on their contribution to the project</p>
+    </div>
+  </div>
+
+    <hr>
+        <div class="text-center">
+          {% if error_message %}
+            <p class="text-red-500">{{ error_message }}</p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    <div class="container mx-auto max-w-md py-10">
+      <div class="bg-red-800 shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        <form id="myForm" action="{% url 'peerapp:Review' %}" method="GET" onsubmit="return validateForm()">
+          {% csrf_token %}
+          <div class="mb-4">
+            <label class="block text-sm font-bold mb-2" for="usn">
+              USN:
+            </label>
+            <input
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="usn" type="text" placeholder="Enter your USN" name="usn" required>
+          </div>
+          <div class="mb-4">
+            <label class="block text-sm font-bold mb-2" for="name">
+              Name:
+            </label>
+            <input
+              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              id="name" type="text" placeholder="Enter your name" name="name" required>
+          </div>
+          <div class="mb-4">
+            <label class="block text-sm font-bold mb-2" for="usn">
+              Batch:
+            </label>
+            <input
+              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              id="batch" placeholder="Enter your batch no" name="batch" required>
+          </div>
+          <div class="flex items-center justify-between">
+            <button
+              class="bg-blue-700 hover:bg-white hover:text-black text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              type="submit"
+              href="{% url 'peerapp:Review' %}">
+              Submit
+          </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <footer class="bg-gray-900 text-white py-8">
+      <div class="container mx-auto flex justify-center">
+        <div class="text-center">
+          <h2 class="text-2xl font-bold mb-4">Useful Links</h2>
+          <ul class="list-none">
+            <li class="mb-2"><a href="#" class="text-gray-400 hover:text-white">Admissions</a></li>
+            <li class="mb-2"><a href="#" class="text-gray-400 hover:text-white">Academics</a></li>
+            <li class="mb-2"><a href="#" class="text-gray-400 hover:text-white">Campus Life</a></li>
+            <li class="mb-2"><a href="#" class="text-gray-400 hover:text-white">Events</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+
+
+
+</body>
+
+<script src="script.js"></script>
+  
+</html>
