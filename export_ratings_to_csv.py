@@ -10,7 +10,7 @@ django.setup()
 from peerapp.models import Rating
 
 # Open the Excel file for reading and writing
-filepath = r'C:/Users/madhu/Desktop/Peer Review/peerreview/project final details_updated.xlsx'
+filepath = r'xlsx file address'
 workbook = openpyxl.load_workbook(filepath)
 sheet = workbook.active
 
@@ -31,6 +31,6 @@ for row in sheet.iter_rows(min_row=2):
         pass
 
 # Save the updated workbook to a new file
-output_filepath = r'C:/Users/madhu/Desktop/Peer Review/peerreview/project final details_updated.xlsx'
+output_filepath = r'xlsx file address'
 workbook.save(output_filepath)
 workbook.close()
